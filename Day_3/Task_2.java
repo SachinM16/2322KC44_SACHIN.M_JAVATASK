@@ -1,0 +1,1 @@
+person -> employee class with salary calculation
