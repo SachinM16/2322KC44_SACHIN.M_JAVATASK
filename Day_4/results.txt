@@ -1,0 +1,3 @@
+Alice - Total: 253, Average: 84.33333333333333
+Bob - Total: 195, Average: 65.0
+Carol - Total: 265, Average: 88.33333333333333
