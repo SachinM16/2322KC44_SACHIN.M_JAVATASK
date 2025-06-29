@@ -1,0 +1,133 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| bankdb             |
+| demo               |
+| employe            |
+| fsd_tasks          |
+| information_schema |
+| library            |
+| mysql              |
+| performance_schema |
+| reservation        |
+| restuarant         |
+| stu                |
+| student            |
+| student_db         |
+| studprofile        |
+| sys                |
++--------------------+
+15 rows in set (0.11 sec)
+
+mysql> create database Day7;
+Query OK, 1 row affected (0.08 sec)
+
+mysql> use Day7;
+Database changed
+mysql> create table student(
+    -> SID int primary key,
+    -> name varchar(100),
+    -> age int,
+    -> Major varchar(50)
+    -> );
+Query OK, 0 rows affected (0.16 sec)
+
+mysql> insert into student values(1,'john',19,'Biology'),(2,'diana',21,'Accounts'),(3,'adam',24,'Commerce'),(4,'eve',20,'Computer Science'),(5,'smith',22,'Chemistry');
+Query OK, 5 rows affected (0.06 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> create table course(
+    -> CID int primary key,
+    -> CName varchar(50),
+    -> fee decimal(10,2);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 4
+mysql> create table course(
+    -> CID int primary key,
+    -> CName varchar(50),
+    -> fee decimal(10,2)
+    -> );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into course values(101,'Java',5000.00),(102,'Data Structure',10000.00),(103,'OS',4500.00),(104,'Python',7000.00),(105,'Web Development',2000.00);
+Query OK, 5 rows affected (0.02 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> update course set fee = 5800.00 where CID = 103;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> create table book(
+    -> BID int primary key,
+    -> title varchar(20),
+    -> Author varchar(15)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> create table member(
+    -> MID int primary key,
+    -> Name varchar(50),
+    -> Joindate date
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> create table borrow(
+    -> BorrowID int primary key,
+    -> MemberID int,
+    -> BID int,
+    -> BorrowDate date,
+    -> foreign key (MemberID) ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 6
+mysql> create table borrow(
+    -> BorrowID int primary key,
+    -> MID int,
+    -> BorrowDate date,
+    -> foreign key (MID) references member(MID),
+    -> BID int,
+    -> foreign key (BID) references book(BID)
+    -> );
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> insert into book values(1,'Machine Learning','John'),(2,'C Basics','Smith'),(3,'Cloud Computing','Diana');
+Query OK, 3 rows affected (0.04 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> insert into member values(1,'sam','2019-05-13'),(2,'tina','2022-10-11'),(3,'mike','2020-02-13');
+Query OK, 3 rows affected (0.02 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> insert into borrow values(1,1,1,'2019-07-01'),(2,2,2,'2022-11-01'),(3,3,3,'2020-03-01');
+ERROR 1292 (22007): Incorrect date value: '1' for column 'BorrowDate' at row 1
+mysql> insert into borrow values(1,1,'2019-07-01',1),(2,2,'2022-11-01',2),(3,3,'2020-03-01',3);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> create table employee(
+    -> EmpID int primary key,
+    -> name varchar(50),
+    -> DeptID int,
+    -> sal decimal(10,2)
+    -> );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> create table dept(
+    -> DeptID int primary key,
+    -> DeptName varchar(25)
+    -> );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into dept values(1,'HR'),(2,'Developer'),(3,'Engineering');
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> insert into employee values(1001,'Smith',1,15000.00),(1002,'William',2,55000.00),(1003,'Emily',2,18000.00),(1004,'Eve',1,21000.00),(1005,'Joe',3,25000.00);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> commit;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> Terminal close -- exit!
