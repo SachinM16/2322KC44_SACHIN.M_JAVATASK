@@ -1,0 +1,140 @@
+mysql> create database Day_10;
+Query OK, 1 row affected (0.03 sec)
+
+mysql> use Day_10;
+Database changed
+mysql> create table student(
+    -> StuID int primary key,
+    -> name varchar(20),
+    -> marks int
+    -> );
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> insert into student values(1,'Alice',85),(2,'Bob',70),(3,'Charlie',92),(4,'Diana',67),(5,'Eve',88);
+Query OK, 5 rows affected (0.04 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from student where mark > 80;
+ERROR 1054 (42S22): Unknown column 'mark' in 'where clause'
+mysql> select * from student where marks > 80;
++-------+---------+-------+
+| StuID | name    | marks |
++-------+---------+-------+
+|     1 | Alice   |    85 |
+|     3 | Charlie |    92 |
+|     5 | Eve     |    88 |
++-------+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> create table course(
+    -> CourID int primary key,
+    -> CourName varchar(20),
+    -> Fee decimal(10,2)\
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> insert into course values(101,'Java',5000),(102,'Python',4500),(103,'DS',5500),(104,'ML',6000),(105,'Cloud',4800);
+Query OK, 5 rows affected (0.02 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> update course set fee = 5800 where courID = 103;\
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from course order by fee;
++--------+----------+---------+
+| CourID | CourName | Fee     |
++--------+----------+---------+
+|    102 | Python   | 4500.00 |
+|    105 | Cloud    | 4800.00 |
+|    101 | Java     | 5000.00 |
+|    103 | DS       | 5800.00 |
+|    104 | ML       | 6000.00 |
++--------+----------+---------+
+5 rows in set (0.01 sec)
+
+mysql> create table book(
+    -> bookId int primary key,
+    -> title varchar(25),
+    -> Author varchar(50)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> insert into book values(1,'Python Basics','John'),(2,'DoEpicShit','Diana'),(3,'IKAGI','Alice');
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from book where title like '%o%';
++--------+---------------+--------+
+| bookId | title         | Author |
++--------+---------------+--------+
+|      1 | Python Basics | John   |
+|      2 | DoEpicShit    | Diana  |
++--------+---------------+--------+
+2 rows in set (0.00 sec)
+
+mysql> create table customer(
+    -> CusID int primary key,
+    -> name varchar(100),
+    -> city varchar(15),
+    -> balance decimal(10,2)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into customer values(1,'tom','delhi',1200),(2,'gwen','AP',800),(3,'anna','odisa',2500);
+Query OK, 3 rows affected (0.02 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from customer where city = 'delhi' and balance > 1000;
++-------+------+-------+---------+
+| CusID | name | city  | balance |
++-------+------+-------+---------+
+|     1 | tom  | delhi | 1200.00 |
++-------+------+-------+---------+
+1 row in set (0.01 sec)
+
+mysql> create table employee(
+    -> EmpID int primary key,
+    -> name varhcar(20),
+    -> sal decimal(10,2)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varhcar(20),
+sal decimal(10,2)
+)' at line 3
+mysql> create table employee(
+    -> EmpID int primary key,
+    -> name varchar(20),
+    -> sal decimal(10,2)
+    -> );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into employee values(1,'Alex',50000.00),(2,'Doe',60000.00),(3,'Cozy',55000.00),(4,'Jake',77000.00);
+Query OK, 4 rows affected (0.02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from employee where name like 'j%';
++-------+------+----------+
+| EmpID | name | sal      |
++-------+------+----------+
+|     4 | Jake | 77000.00 |
++-------+------+----------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee order by sal desc;
++-------+------+----------+
+| EmpID | name | sal      |
++-------+------+----------+
+|     4 | Jake | 77000.00 |
+|     2 | Doe  | 60000.00 |
+|     3 | Cozy | 55000.00 |
+|     1 | Alex | 50000.00 |
++-------+------+----------+
+4 rows in set (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> Terminal close -- exit!
